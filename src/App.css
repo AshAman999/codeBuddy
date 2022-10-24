@@ -1,38 +1,99 @@
-.App {
-  text-align: center;
-}
-
-.App-logo {
-  height: 40vmin;
-  pointer-events: none;
-}
-
-@media (prefers-reduced-motion: no-preference) {
-  .App-logo {
-    animation: App-logo-spin infinite 20s linear;
-  }
-}
-
-.App-header {
-  background-color: #282c34;
-  min-height: 100vh;
+.homePageWrapper{
   display: flex;
-  flex-direction: column;
   align-items: center;
   justify-content: center;
-  font-size: calc(10px + 2vmin);
+  color: #fff;
+  height: 100vh;
+}
+.formWrapper {
+  background: #2832a862;
+  padding: 20px;
+  border-radius: 10px;
+  width: 400px;
+  max-width: 90%;
+
+}
+footer {
+  position: fixed;
+  bottom: 0;
+}
+
+footer a {
+  color: #4aee88;
+}
+
+.inputGroup {
+  display: flex;
+  flex-direction: column;
+}
+.mainLabel {
+  margin-bottom: 20px;
+  margin-top: 0;
+}
+.homePageLogo{
+  height: 80px;
+  margin-bottom: 30px;
+}
+.inputBox{
+  padding: 10px;
+  border-radius: 5px;
+  border: none;
+  outline: none;
+  margin-bottom: 14px;
+  background: #eee;
+  font-size: 16px;
+  font-weight: bold;
+}
+
+.btn{
+  border: none;
+  padding: 10px;
+  border-radius: 5px;
+  font-size: 16px;
+  cursor: pointer;
+  transition:  all 0.3s ease-in-out;
+}
+.joinBtn{
+  background: #4aee88;
+  
+}
+
+.joinBtn :hover {
   color: white;
 }
 
-.App-link {
-  color: #61dafb;
+.createInfo {
+  margin: 0 auto;
+  margin-top: 20px;
 }
 
-@keyframes App-logo-spin {
-  from {
-    transform: rotate(0deg);
-  }
-  to {
-    transform: rotate(360deg);
-  }
+.createNewBtn {
+  color:  #4aee88;
+  text-decoration: none;
+  border-bottom: 1px solid #4aee88;
+  transition:  all 0.3s ease-in-out;
+}
+.createNewBtn :hover , footer a :hover {
+  color: white;
+  border-bottom: 1px solid white;
+}
+
+.mainWrap {
+  display: grid;
+  grid-template-columns: 230px 1fr;
+}
+
+.aside {
+  background: #2832a862;
+  padding: 16px;
+  color: white;
+ display: flex;
+  flex-direction: column;
+}
+
+.Codemirror {
+min-height: (100vh - 20px);
+font-size: 20px;
+line-height: 1.6;
+padding-top: 20px;
 }
