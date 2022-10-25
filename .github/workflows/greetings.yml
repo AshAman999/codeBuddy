@@ -12,5 +12,5 @@ jobs:
     - uses: actions/first-interaction@v1
       with:
         repo-token: ${{ secrets.GITHUB_TOKEN }}
-        issue-message: "Welcone , thanks for opening your first issue here"
-        pr-message: "Congratulations for your first contribution here "
+        issue-message: 'Hello @${{ github.actor }}👋, thank you for submitting an issue!'
+        pr-message: 'Hello @${{ github.actor }}👋, thank you submitting a pull request!'
