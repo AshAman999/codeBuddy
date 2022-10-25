@@ -106,27 +106,32 @@ export const EditorHome = () => {
     <div className="mainWrap">
       <div className="aside">
         <div className="asideInner">
-          <div className="logoImage">
-            {/* <img src="https://i.imgur.com/1Q9Q1Zy.png" alt="logo" /> */}
+          <div className="user-info">
+            <div className="logoImage">
+              {/* <img src="https://i.imgur.com/1Q9Q1Zy.png" alt="logo" /> */}
+            </div>
+            <div className="connected-heading">
+              Connected ({connectedUsers.length})
+            </div>
+            <div className="clientList">
+              {connectedUsers.map((client) => {
+                return (
+                  <Client
+                    key={client.socketId}
+                    userName={client.userName}
+                  ></Client>
+                );
+              })}
+            </div>
           </div>
-          <h3>Connected</h3>
-          <div className="clientList">
-            {connectedUsers.map((client) => {
-              return (
-                <Client
-                  key={client.socketId}
-                  userName={client.userName}
-                ></Client>
-              );
-            })}
+          <div className="utility-buttons">
+            <button className="btn copyBtn" onClick={copyRoomId}>
+              Copy Room Id
+            </button>
+            <button className="btn leaveBtn" onClick={leaveRoom}>
+              Leave
+            </button>
           </div>
-          <button className="btn copyBtn" onClick={copyRoomId}>
-            Copy Room Id
-          </button>
-          <button className="btn leaveBtn" onClick={leaveRoom}>
-            {" "}
-            Leave{" "}
-          </button>
         </div>
       </div>
       <div className="editorWrap">
