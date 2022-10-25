@@ -84,10 +84,10 @@ footer a {
 }
 
 .aside {
-  background: #2832a862;
+  background: #595859;
   padding: 16px;
   color: white;
- display: flex;
+  display: flex;
   flex-direction: column;
 }
 
@@ -96,4 +96,13 @@ min-height: (100vh - 20px);
 font-size: 20px;
 line-height: 1.6;
 padding-top: 20px;
+}
+
+.HomePageFooter{
+  color: #000;
+}
+.editorWrap{
+  height: 100vh;
+  display: flex;
+  flex-direction: column;
 }
