@@ -2,23 +2,32 @@ import React, { useState } from "react";
 import toast from "react-hot-toast";
 import { useNavigate } from "react-router-dom";
 
+// Component to display the Home / Start Page of the application
 export const HomePage = () => {
+  // Reference to the current page Navigation
   const navigate = useNavigate();
+
+  // Hook to store the current room ID
   const [roomId, setRoomId] = useState("");
+
+  // Hook to store the current user name
   const [userName, setUserName] = useState("");
+
+  // Function generates a random room ID
   const generateRoomCode = () => {
-    const roomCode = Math.random().toString(36).substring(2, 7);
+    const roomCode = Math.random().toString(36).substring(2, 9);
     return roomCode;
   };
 
+  // Function to handle the Create New Room button click
   const createNewRoom = (e) => {
     e.preventDefault();
     const id = generateRoomCode();
     setRoomId(id);
     toast.success("Room created successfully");
-    //Redirect to editor page
   };
 
+  // Function to handle the Join Room button click
   const joinRoom = (e) => {
     e.preventDefault();
     if (!roomId || !userName) {
@@ -26,7 +35,6 @@ export const HomePage = () => {
       return;
     } else {
       toast.success("Room joined successfully");
-
       navigate(`/editorHome/${roomId}`, {
         state: {
           userName,
@@ -63,18 +71,17 @@ export const HomePage = () => {
           </button>
           <span className="createInfo">
             Don't have an invitation code? {/* instead of button user a tag */}
-            <button className="createNewBtn" onClick={createNewRoom}>
+            <a className="createNewBtn" onClick={createNewRoom}>
               Create a new room
-            </button>
+            </a>
           </span>
         </div>
       </div>
       <footer>
-        <h4>
+        <h4 className="HomePageFooter">
           Built with ❣️ by <a href="https://github.com/ashaman999">Aman</a>
         </h4>
       </footer>
     </div>
   );
 };
-//2:52:00

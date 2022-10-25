@@ -13,7 +13,7 @@ const Editor = ({ socketRef, roomId, onCodeChange }) => {
     // CodeMirror instance given to id "realTimeEditor"
     async function init() {
       editorRef.current = Codemirror.fromTextArea(
-        document.getElementById("realtimeEditor"),
+        document.getElementById("realTimeEditor"),
         {
           // Configurations for the code editor
           mode: { name: "javascript", json: true },
@@ -53,7 +53,7 @@ const Editor = ({ socketRef, roomId, onCodeChange }) => {
     };
   }, [socketRef.current]);
 
-  return <textarea id="realtimeEditor"></textarea>;
+  return <textarea id="realTimeEditor"></textarea>;
 };
 
 export default Editor;
