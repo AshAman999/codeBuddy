@@ -17,15 +17,6 @@ function getAllConnectedClient(roomId) {
     }) || []
   );
 }
-// Array.from(io.sockets.adapter.rooms.get(roomId)) ||
-//     [].map((socketId) => {
-//       return {
-//         socketId,
-//         userName: userSocketMap[socketId],
-//       };
-//     })
-//   );
-
 io.on("connection", (socket) => {
 
   socket.on("join", ({ roomId, userName }) => {
