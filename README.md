@@ -48,3 +48,4 @@
 - If you have any ideas do raise an issue for that.
 - If you feel like you can help me with code, have a look at the issues section
 
+This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
