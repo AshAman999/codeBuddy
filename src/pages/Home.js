@@ -29,9 +29,9 @@ export const HomePage = () => {
 
       navigate(`/editorHome/${roomId}`, {
         state: {
-            userName,
+          userName,
         },
-    }); 
+      });
     }
   };
   return (
@@ -62,12 +62,10 @@ export const HomePage = () => {
             Join
           </button>
           <span className="createInfo">
-            Don't have an invitation code?{" "}
-            <a href="/editorHome" className="createNewBtn">
-              {" "}
-              onClick={createNewRoom}
+            Don't have an invitation code? {/* instead of button user a tag */}
+            <button className="createNewBtn" onClick={createNewRoom}>
               Create a new room
-            </a>
+            </button>
           </span>
         </div>
       </div>
@@ -79,3 +77,4 @@ export const HomePage = () => {
     </div>
   );
 };
+//2:52:00

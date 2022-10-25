@@ -27,13 +27,11 @@ function getAllConnectedClient(roomId) {
 //   );
 
 io.on("connection", (socket) => {
-  // console.log("a user connected ", socket.id);
 
   socket.on("join", ({ roomId, userName }) => {
     userSocketMap[socket.id] = userName;
     socket.join(roomId);
     const clients = getAllConnectedClient(roomId);
-    console.log(clients);
 
     clients.forEach(({ socketId }) => {
       io.to(socketId).emit("joined", {
@@ -41,17 +39,32 @@ io.on("connection", (socket) => {
         userName,
         socketId: socket.id,
       });
-      console.log("joined", clients, userName, socket.id);
     });
 
     // socket.to(roomId).emit("user-connected", userName);
   });
 
-  //   socket.on("disconnect", () => {
-  //     const userName = userSocketMap[socket.id];
-  //     socket.broadcast.emit("user-disconnected", userName);
-  //     delete userSocketMap[socket.id];
-  //   });
+
+  socket.on('CodeChange', ({roomId, code}) => {
+    socket.in(roomId).emit('CodeChange', {code});
+  })
+
+  socket.on('getInitialCode', ({socketId,code}) => {
+   io.to(socketId).emit('CodeChange', {code});
+  })
+  socket.on("disconnecting", () => {
+    const rooms = [...socket.rooms];
+    rooms.forEach((roomId) => {
+      socket.in(roomId).emit("user-disconnected", {
+        clients: getAllConnectedClient(roomId),
+        socketId: socket.id,
+        userName: userSocketMap[socket.id],
+      });
+    });
+
+    delete userSocketMap[socket.id];
+    socket.leave();
+  });
 });
 
 const port = process.env.PORT || 5000;
