@@ -31,7 +31,7 @@
 
 - fork the repo
 - run `yarn install`
-- run `npm start` to start the react project
+- run `yarn start` to start the react project
 - run `nodemon server.js` to start the relay server
 - visit [http://localhost:3000/](http://localhost:3000/) to see the running application
 
