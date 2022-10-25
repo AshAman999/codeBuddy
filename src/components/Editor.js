@@ -5,15 +5,17 @@ import "codemirror/theme/dracula.css";
 import "codemirror/mode/javascript/javascript";
 import "codemirror/addon/edit/closetag";
 import "codemirror/addon/edit/closebrackets";
-// import ACTIONS from '../Actions';
 
+// Component to display the actual Code-editor
 const Editor = ({ socketRef, roomId, onCodeChange }) => {
   const editorRef = useRef(null);
   useEffect(() => {
+    // CodeMirror instance given to id "realTimeEditor"
     async function init() {
       editorRef.current = Codemirror.fromTextArea(
         document.getElementById("realtimeEditor"),
         {
+          // Configurations for the code editor
           mode: { name: "javascript", json: true },
           theme: "dracula",
           autoCloseTags: true,
@@ -21,7 +23,7 @@ const Editor = ({ socketRef, roomId, onCodeChange }) => {
           lineNumbers: true,
         }
       );
-
+      // Emit the changes to the server to be broadcasted to other users
       editorRef.current.on("change", (instance, changes) => {
         const { origin } = changes;
         const code = instance.getValue();
@@ -36,7 +38,7 @@ const Editor = ({ socketRef, roomId, onCodeChange }) => {
     }
     init();
   }, []);
-
+  // Listen for code changes from other users and update the editor accordingly
   useEffect(() => {
     if (socketRef.current) {
       socketRef.current.on("CodeChange", ({ code }) => {
@@ -45,7 +47,7 @@ const Editor = ({ socketRef, roomId, onCodeChange }) => {
         }
       });
     }
-
+    // Unsibscribe from the socket event [CodeChange] when the component unmounts
     return () => {
       socketRef.current.off("CodeChange");
     };

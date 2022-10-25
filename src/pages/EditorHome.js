@@ -9,51 +9,59 @@ import {
   Navigate,
 } from "react-router-dom";
 import toast from "react-hot-toast";
+// Component to display the main page of the application,
+// which contains the code editor and the list of connected clients
 
 export const EditorHome = () => {
+  // Socket reference to be used in the Editor component
   const socketRef = useRef(null);
+  // Reference to the code editor's value
   const codeRef = useRef(null);
+  // Reference to the current webpage URL
   const location = useLocation();
+  // Reference to the current room Joined
   const { roomId } = useParams();
-
+  // Reference to the current connected clients
   const [connectedUsers, setConnectedUsers] = useState([]);
+  // Reference to the current page Navigation
+
   const reactNavigator = useNavigate();
   useEffect(() => {
+    // Initialize the socket connection
     const init = async () => {
       socketRef.current = await initSocket();
-      // handle errors
       socketRef.current.on("connect_error", (err) => {
-        console.log(err.message);
-        // also show a toast
+        // Show error toast if there is an error connecting to the server
         toast.error(err.message);
-        // amd then redirect to home page
+        // Navigate to the home page
         reactNavigator("/");
       });
-      // handle disconnect
+      // If connection dies in the middle of the session
       socketRef.current.on("connect_failed", () => {
-        console.log("connection failed");
-        // also show a toast
+        //Show error toast
         toast.error("connection failed");
-        // amd then redirect to home page
+        // Navigate to the home page
         reactNavigator("/");
       });
+      // If no troubles then join the room and brodcast the same message
       socketRef.current.emit("join", {
         roomId,
         userName: location.state?.userName,
       });
 
-      // Listen for joined event
+      // Listen for "joined" event from the server and update the connected users list
       socketRef.current.on("joined", ({ clients, userName, socketId }) => {
         if (userName !== location.state?.userName) {
           toast.success(`${userName} joined the room`);
         }
         setConnectedUsers(clients);
+        // If the user connects for first time, sync the code from the session
         socketRef.current.emit("getInitialCode", {
-          code:codeRef.current,
+          code: codeRef.current,
           socketId,
         });
-      },);
-      // listen for user-disconnected event
+      });
+      // Listen for user-disconnected event and update the connected users list
       socketRef.current.on(
         "user-disconnected",
         ({ clients, socketId, userName }) => {
@@ -69,12 +77,14 @@ export const EditorHome = () => {
 
     init();
     return () => {
+      // Unsubscribe from all the socket events when the component unmounts
       socketRef.current.disconnect();
       socketRef.current.off("joined");
       socketRef.current.off("user-disconnected");
     };
   }, [location.state?.userName, reactNavigator, roomId]);
 
+  // Copy roomId to clipboard
   async function copyRoomId() {
     try {
       await navigator.clipboard.writeText(roomId);
@@ -85,6 +95,7 @@ export const EditorHome = () => {
     }
   }
 
+  // Leave the room and navigate to the home page
   function leaveRoom() {
     reactNavigator("/");
   }
@@ -119,10 +130,13 @@ export const EditorHome = () => {
         </div>
       </div>
       <div className="editorWrap">
-        <Editor socketRef={socketRef} roomId={roomId} onCodeChange={(code)=>{
-
-          codeRef.current = code;
-        }} />
+        <Editor
+          socketRef={socketRef}
+          roomId={roomId}
+          onCodeChange={(code) => {
+            codeRef.current = code;
+          }}
+        />
       </div>
     </div>
   );
