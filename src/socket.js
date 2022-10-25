@@ -1,6 +1,6 @@
 import {io} from 'socket.io-client';
 
-
+// WebSocket connection of the client
 export const initSocket = async() =>{
     const options = {
         'force new connection': true,
