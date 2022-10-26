@@ -1,6 +1,6 @@
-import React, {useState} from "react";
+import React, { useState } from "react";
 import toast from "react-hot-toast";
-import {useNavigate} from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 
 // Component to display the Home / Start Page of the application
 export const HomePage = () => {
@@ -45,11 +45,7 @@ export const HomePage = () => {
   return (
     <div className="homePageWrapper">
       <div className="formWrapper">
-        <img
-          src="./logo.png"
-          alt="logo"
-          className="homePageLogo"
-        />
+        <img src="./logo.png" alt="logo" className="homePageLogo" />
         <div className="inputGroup">
           <input
             type="text"
