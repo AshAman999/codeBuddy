@@ -39,6 +39,7 @@ https://codebuddytextedit.netlify.app/
 - run `yarn start`  to start the react project
 ### To start the server
 - run `cd server`
+- run `npm i`
 - run `nodemon server.js` to start the relay server
 - visit [http://localhost:3000/](http://localhost:3000/) to see the running application
                      
