@@ -4,9 +4,10 @@
   justify-content: center;
   color: #fff;
   height: 100vh;
+  background-color: #282a36;
 }
 .formWrapper {
-  background: #2832a862;
+  background: #fff;
   padding: 20px;
   border-radius: 10px;
   width: 400px;
@@ -20,18 +21,21 @@ footer {
 footer a {
   color: #4aee88;
 }
-
+.createInfo{
+  color: #000;
+}
 .inputGroup {
   display: flex;
   flex-direction: column;
 }
 .mainLabel {
-  margin-bottom: 20px;
+  margin-bottom: 10px;
   margin-top: 0;
+  color: #000;
 }
 .homePageLogo {
   height: 80px;
-  margin-bottom: 30px;
+  margin-bottom: 10px;
 }
 .inputBox {
   padding: 10px;
@@ -83,7 +87,7 @@ footer a :hover {
 }
 
 .aside {
-  background: #2d2d2d;
+  background: #013e2f;
   padding: 12px;
   color: white;
   display: flex;
@@ -94,12 +98,12 @@ footer a :hover {
   display: flex;
   flex-direction: column;
   justify-content: space-between;
-  min-height: 95vh;
-  overflow: scroll;
+  min-height: 96vh;
+  overflow: unset;
 }
 
 .connected-heading {
-  font-size: 30px;
+  font-size: 20px;
   font-weight: 700;
   color: cyan;
   margin-bottom: 20px;
@@ -130,7 +134,7 @@ footer a :hover {
 }
 
 .HomePageFooter {
-  color: #000;
+  color: #fff;
 }
 .editorWrap {
   height: 100vh;
