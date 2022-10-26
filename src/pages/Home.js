@@ -46,11 +46,10 @@ export const HomePage = () => {
     <div className="homePageWrapper">
       <div className="formWrapper">
         <img
-          src="https://stackoverflow.design/assets/img/logos/so/logo-stackoverflow.png"
+          src="./logo.png"
           alt="logo"
           className="homePageLogo"
         />
-        <h4 className="mainLabel">Paste Invitation Code</h4>
         <div className="inputGroup">
           <input
             type="text"
@@ -62,7 +61,7 @@ export const HomePage = () => {
           <input
             type="text"
             className="inputBox"
-            placeholder="Name"
+            placeholder="User Name"
             value={userName}
             onChange={(e) => setUserName(e.target.value)}
           />
