@@ -1,6 +1,6 @@
-import React, { useState } from "react";
+import React, {useState} from "react";
 import toast from "react-hot-toast";
-import { useNavigate } from "react-router-dom";
+import {useNavigate} from "react-router-dom";
 
 // Component to display the Home / Start Page of the application
 export const HomePage = () => {
