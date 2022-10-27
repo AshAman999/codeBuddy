@@ -53,6 +53,7 @@ export const HomePage = () => {
         <div className="inputGroup">
           <input
             type="text"
+            data-testid="room-id"
             className="inputBox"
             placeholder="Invitation Code"
             value={roomId}
@@ -65,14 +66,14 @@ export const HomePage = () => {
             value={userName}
             onChange={(e) => setUserName(e.target.value)}
           />
-          <button className="btn joinBtn" onClick={joinRoom}>
+          <button type="submit" className="btn joinBtn" onClick={joinRoom}>
             Join
           </button>
           <span className="createInfo">
             Don't have an invitation code? {/* instead of button user a tag */}
-            <a className="createNewBtn" onClick={createNewRoom}>
+            <button type="button" className="createNewBtn" onClick={createNewRoom}>
               Create a new room
-            </a>
+            </button>
           </span>
         </div>
       </div>
