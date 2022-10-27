@@ -1,16 +1,18 @@
-import { React, useEffect, useRef, useState } from "react";
-import Client from "../components/Client";
-import Editor from "../components/Editor";
-import { initSocket } from "../socket";
+import {saveAs} from "file-saver";
+import {React, useEffect, useRef, useState} from "react";
+import toast from "react-hot-toast";
+import {FaDownload} from "react-icons/fa";
 import {
+  Navigate,
   useLocation,
   useNavigate,
   useParams,
-  Navigate,
 } from "react-router-dom";
-import toast from "react-hot-toast";
-import { saveAs } from "file-saver";
-import { FaDownload } from "react-icons/fa";
+
+import Client from "../components/Client";
+import Editor from "../components/Editor";
+import {initSocket} from "../socket";
+
 // Component to display the main page of the application,
 // which contains the code editor and the list of connected clients
 
