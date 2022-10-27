@@ -1,6 +1,6 @@
-import React, {useState} from "react";
+import React, { useState } from "react";
 import toast from "react-hot-toast";
-import {useNavigate} from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 
 // Component to display the Home / Start Page of the application
 export const HomePage = () => {
@@ -45,11 +45,7 @@ export const HomePage = () => {
   return (
     <div className="homePageWrapper">
       <div className="formWrapper">
-        <img
-          src="./logo.png"
-          alt="logo"
-          className="homePageLogo"
-        />
+        <img src="./logo.png" alt="logo" className="homePageLogo" />
         <div className="inputGroup">
           <input
             type="text"
@@ -71,7 +67,11 @@ export const HomePage = () => {
           </button>
           <span className="createInfo">
             Don't have an invitation code? {/* instead of button user a tag */}
-            <button type="button" className="createNewBtn" onClick={createNewRoom}>
+            <button
+              type="button"
+              className="createNewBtn"
+              onClick={createNewRoom}
+            >
               Create a new room
             </button>
           </span>

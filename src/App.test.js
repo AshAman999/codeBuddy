@@ -1,4 +1,4 @@
-import {fireEvent, render, screen} from "@testing-library/react";
+import { fireEvent, render, screen } from "@testing-library/react";
 
 import App from "./App";
 
@@ -11,7 +11,7 @@ describe("Test app renders properly", () => {
     const createRoomText = screen.getByText(/Create a new room/i);
     expect(createRoomText).toBeInTheDocument();
 
-    const joinRoomButton = screen.getByRole("button", {name : /Join/i});
+    const joinRoomButton = screen.getByRole("button", { name: /Join/i });
     expect(joinRoomButton).toBeInTheDocument();
   });
 
@@ -19,7 +19,7 @@ describe("Test app renders properly", () => {
     render(<App />);
 
     const createRoomButton = screen.getByRole("button", {
-      name : /Create a new room/,
+      name: /Create a new room/,
     });
     expect(createRoomButton).toHaveClass("createNewBtn");
 
@@ -36,7 +36,7 @@ describe("Test app renders properly", () => {
   test("join room on empty value", () => {
     render(<App />);
 
-    const joinRoomButton = screen.getByRole("button", {name : /Join/});
+    const joinRoomButton = screen.getByRole("button", { name: /Join/ });
     fireEvent.click(joinRoomButton);
 
     const errorMessage = screen.getByText(/Please enter room id and user name/);
