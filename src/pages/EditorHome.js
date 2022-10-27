@@ -9,6 +9,7 @@ import {
   Navigate,
 } from "react-router-dom";
 import toast from "react-hot-toast";
+import { saveAs } from 'file-saver';
 // Component to display the main page of the application,
 // which contains the code editor and the list of connected clients
 
@@ -99,6 +100,16 @@ export const EditorHome = () => {
   function leaveRoom() {
     reactNavigator("/");
   }
+  
+// Download the code to user's local machine as js file
+  function downloadCode(){
+    var content = codeRef.current;
+    var filename = `codeBuddy_${roomId}.js`;
+    var blob = new Blob([content], {
+     type: "text/plain;charset=utf-8"
+    });
+    saveAs(blob, filename);
+  }
   if (!location.state) {
     <Navigate to="/" />;
   }
@@ -106,10 +117,7 @@ export const EditorHome = () => {
     <div className="mainWrap">
       <div className="aside">
         <div className="asideInner">
-          <div className="user-info">
-            <div className="logoImage">
-              {/* <img src="https://i.imgur.com/1Q9Q1Zy.png" alt="logo" /> */}
-            </div>
+          <div className="user-info">  
             <div className="connected-heading">
               Connected ({connectedUsers.length})
             </div>
