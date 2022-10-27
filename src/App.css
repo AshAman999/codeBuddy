@@ -6,6 +6,7 @@
   height: 100vh;
   background-color: #282a36;
 }
+
 .formWrapper {
   background: #fff;
   padding: 20px;
@@ -13,6 +14,7 @@
   width: 400px;
   max-width: 90%;
 }
+
 footer {
   position: fixed;
   bottom: 0;
@@ -21,22 +23,27 @@ footer {
 footer a {
   color: #4aee88;
 }
-.createInfo{
+
+.createInfo {
   color: #000;
 }
+
 .inputGroup {
   display: flex;
   flex-direction: column;
 }
+
 .mainLabel {
   margin-bottom: 10px;
   margin-top: 0;
   color: #000;
 }
+
 .homePageLogo {
   height: 80px;
   margin-bottom: 10px;
 }
+
 .inputBox {
   padding: 10px;
   border-radius: 5px;
@@ -56,6 +63,7 @@ footer a {
   cursor: pointer;
   transition: all 0.3s ease-in-out;
 }
+
 .joinBtn {
   background: #4aee88;
 }
@@ -70,12 +78,20 @@ footer a {
 }
 
 .createNewBtn {
-  color: #4aee88;
+  color: #13ca59;
   text-decoration: none;
-  border-bottom: 1px solid #4aee88;
+  outline: none !important;
+  border: none;
+  background: none;
+  cursor: pointer;
   transition: all 0.3s ease-in-out;
 }
-.createNewBtn :hover,
+
+.createNewBtn :hover {
+  color: darkgreen;
+  text-decoration: underline;
+}
+
 footer a :hover {
   color: white;
   border-bottom: 1px solid white;
@@ -109,7 +125,7 @@ footer a :hover {
   margin-bottom: 20px;
 }
 
-.download-code-btn{
+.download-code-btn {
   padding-left: 20px;
   color: rgb(5, 152, 237);
   margin-top: 5px;
@@ -132,7 +148,8 @@ footer a :hover {
   justify-content: space-between;
 }
 
-.editorWrap .Codemirror, .cm-s-dracula {
+.editorWrap .Codemirror,
+.cm-s-dracula {
   height: 100vh !important;
   font-size: 20px;
   line-height: 1.6;
@@ -142,17 +159,18 @@ footer a :hover {
 .HomePageFooter {
   color: #fff;
 }
+
 .editorWrap {
   height: 100vh;
   display: flex;
   flex-direction: column;
 }
 
-
 @media screen and (max-width: 900px) {
   .aside {
     display: none;
   }
+
   .editorWrap {
     width: 100vw;
   }
