@@ -109,6 +109,12 @@ footer a :hover {
   margin-bottom: 20px;
 }
 
+.download-code-btn{
+  padding-left: 20px;
+  color: rgb(5, 152, 237);
+  margin-top: 5px;
+}
+
 .client {
   display: flex;
   justify-content: flex-start;
