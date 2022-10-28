@@ -104,6 +104,58 @@ export const EditorHome = () => {
     reactNavigator("/");
   }
 
+  // TODO : Format the result before showing up.
+  function formatOutput(result, isSuccess) {
+    if (!isSuccess) {
+      return `
+        <h3>Error: </h3><br>
+        {result}
+      `;
+    } else {
+      return `
+        <h3>Output: </h3><br>
+        {result}
+      `;
+    }
+  }
+
+  // TODO : Run the code in browser.
+  async function runCode() {
+    let code = codeRef.current || "console.log('No code to run')";
+    let codeResultBox = document.querySelector(".code-result-box");
+    codeResultBox.classList.remove("hide");
+
+    codeResultBox.innerHTML = "Code Running...";
+
+    console.log(code);
+    // let resp = await fetch("https://run.glot.io/languages/javascript/latest", {
+    //   method: "POST",
+    //   headers: {
+    //     "Content-Type": "application/json",
+    //   },
+    //   body: JSON.stringify({
+    //     files: [
+    //       {
+    //         name: "main.js",
+    //         content: code,
+    //       },
+    //     ],
+    //   }),
+    // });
+
+    // let result = await resp.json();
+
+    // if (result["stderr"]) {
+    //   codeResultBox.innerHTML = formatOutput(result["stderr"], false);
+    // } else {
+    //   codeResultBox.innerHTML = formatOutput(result["stdout"], true);
+    // }
+  }
+
+  function hideCodeBox() {
+    document.querySelector(".code-result-box").classList.add("hide");
+  }
+
   // Download the code to user's local machine as js file
   function downloadCode() {
     var content = codeRef.current;
@@ -138,6 +190,18 @@ export const EditorHome = () => {
                 );
               })}
             </div>
+          </div>
+          <button className="btn run-button" onClick={runCode} type="button">
+            Run
+          </button>
+          <div className="code-result-box hide">
+            <button
+              className="btn btn-danger"
+              onClick={hideCodeBox}
+              type="button"
+            >
+              X
+            </button>
           </div>
           <div className="utility-buttons">
             <button className="btn copyBtn" onClick={copyRoomId}>

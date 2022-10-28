@@ -64,6 +64,11 @@ footer a {
   transition: all 0.3s ease-in-out;
 }
 
+btn-danger {
+  background: #7e2121;
+  color: #fff;
+}
+
 .joinBtn {
   background: #4aee88;
 }
@@ -75,6 +80,51 @@ footer a {
 .createInfo {
   margin: 0 auto;
   margin-top: 20px;
+}
+
+.run-button {
+  background: #5227b6;
+  color: #fff;
+  font-size: 16px;
+  font-weight: bold;
+  padding: 10px;
+  max-width: fit-content;
+  border-radius: 5px;
+  border: none;
+  outline: none;
+  cursor: pointer;
+  transition: all 0.3s ease-in-out;
+  position: fixed;
+  top: 3%;
+  right: 1%;
+  z-index: 1;
+}
+
+.code-result-box {
+  position: fixed;
+  top: 20%;
+  left: 40%;
+  background: rgb(1, 17, 20);
+  padding: 20px;
+  border-radius: 10px;
+  width: 400px;
+  height: 300px;
+  max-width: 90%;
+  margin: 0 auto;
+  margin-top: 20px;
+  z-index: 1;
+  overflow: scroll;
+  box-shadow: rgba(0, 0, 0, 0.25) 0px 54px 55px,
+    rgba(0, 0, 0, 0.12) 0px -12px 30px, rgba(0, 0, 0, 0.12) 0px 4px 6px,
+    rgba(0, 0, 0, 0.17) 0px 12px 13px, rgba(0, 0, 0, 0.09) 0px -3px 5px;
+}
+
+.hide {
+  display: none;
+}
+
+.code-result-box::-webkit-scrollbar {
+  display: none;
 }
 
 .createNewBtn {
@@ -173,5 +223,8 @@ footer a :hover {
 
   .editorWrap {
     width: 100vw;
+  }
+  .run-button {
+    z-index: 1;
   }
 }
