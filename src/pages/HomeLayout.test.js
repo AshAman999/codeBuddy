@@ -1,4 +1,4 @@
-import {render, screen} from "@testing-library/react";
+import { render, screen } from "@testing-library/react";
 
 import App from "../App";
 
@@ -11,7 +11,7 @@ describe("Test app renders properly", () => {
     const createRoomText = screen.getByText(/Create a new room/i);
     expect(createRoomText).toBeInTheDocument();
 
-    const joinRoomButton = screen.getByRole("button", {name : /Join/i});
+    const joinRoomButton = screen.getByRole("button", { name: /Join/i });
     expect(joinRoomButton).toBeInTheDocument();
   });
 
