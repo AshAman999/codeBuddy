@@ -1,9 +1,10 @@
 import { fireEvent, render, screen } from "@testing-library/react";
+
 import App from "../App";
 
 describe("Buttons works as expected", () => {
   test("create a new room works", () => {
-    render(<App/>);
+    render(<App />);
 
     const createRoomButton = screen.getByRole("button", {
       name: /Create a new room/,
