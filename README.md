@@ -1,4 +1,5 @@
 # CodeBuddy
+
 ![image](https://github.com/AshAman999/codeBuddy/actions/workflows/node.js.yml/badge.svg)
 <br><br>
 Try it out here 👇
@@ -11,11 +12,15 @@ https://codebuddytextedit.netlify.app/
 - Let's users connect and write code in collaboration
 
 ## Build & Run
+
 ### React App
+
 - Fork Repo: `git clone https://github.com/AshAman999/codeBuddy`
 - Install Dependencies `yarn install`
 - Start the React Project `yarn start`<br>
+
 ### Server
+
 - Start Server `cd server`
 - Install Dependencies `npm i`
 - Start relay Server `node server.js`
@@ -38,7 +43,7 @@ https://codebuddytextedit.netlify.app/
 - See all the users on the home screen
 - Ability to write code in collabration
 - Low network Usablity<br><br>
-*More features coming soon*
+  _More features coming soon_
 
 ## Screenshots
 
@@ -47,7 +52,9 @@ https://codebuddytextedit.netlify.app/
 ![image](https://user-images.githubusercontent.com/33085535/199157082-07b7c8e8-2b7e-4ffd-95f4-30ddffb9a28d.png)
 
 ## Contributing
+
 Before contributing, please read the [common contributors guide](https://opensource.guide/) for useful information.
+
 ## Extras
 
 Thanks for your read into this project's readme, would really appreciate the contributions and even reporting of bugs is highly appreciated.
