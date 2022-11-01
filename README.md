@@ -32,6 +32,10 @@ https://codebuddytextedit.netlify.app/
 
 ## Screenshots
 
+![image](https://user-images.githubusercontent.com/57723319/199150779-9094c33e-8035-4417-bfeb-e1e3f1ec8194.png)
+
+![enter image description here](https://user-images.githubusercontent.com/33085535/198697707-489bfb21-5ce9-4e1a-9010-0e5ffd19df75.png)
+
 
 ## Contributing
 - fork the repo
