@@ -34,7 +34,7 @@ https://codebuddytextedit.netlify.app/
 | UI Library             | React                               |
 | State Management       | Default Hooks                       |
 | Web Sockets            | WebSocket client for react and Node |
-| Speciality             | Low Network Usage                   |
+| Speciality             | Low Network Usage , Lightweight     |
 | Backend (Relay Server) | Node.js                             |
 
 ## Features
