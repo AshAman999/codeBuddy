@@ -1,0 +1,42 @@
+.code-result-box {
+  display: flex;
+  flex-direction: column;
+  transition: 0.3s;
+}
+
+.hide {
+  display: none;
+  visibility: hidden;
+}
+
+.code-result-box .btn {
+  position: absolute;
+  top: 10px;
+  right: 10px;
+  width: 30px;
+  color: black;
+  background-color: rgb(255, 255, 255);
+  box-shadow: rgba(149, 157, 165, 0.2) 0px 8px 24px;
+  transition: 0.3s;
+}
+
+.code-result-box .btn:hover {
+  background-color: rgb(192, 57, 57);
+  color: white;
+  box-shadow: rgba(149, 157, 165, 0.2) 0px 8px 24px;
+}
+.code-result-box .btn:active {
+  background-color: rgb(192, 57, 57);
+  color: white;
+  box-shadow: rgba(149, 157, 165, 0.2) 0px 8px 24px;
+  transform: scale(0.9);
+}
+
+.code-result-box .btn:focus {
+  outline: none;
+}
+
+.code-result-iframe {
+  margin: 10px 20px 0 0;
+  border: none;
+}

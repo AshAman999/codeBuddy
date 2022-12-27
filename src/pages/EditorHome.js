@@ -8,10 +8,55 @@ import {
   useNavigate,
   useParams,
 } from "react-router-dom";
+import "./codeRun.css";
 
 import Client from "../components/Client";
 import Editor from "../components/Editor";
 import { initSocket } from "../socket";
+
+let htmlContent = `
+    <html>
+        <head>
+          <style> html {color: white; } </style>
+        </head>
+      <body>
+        <div id="root"><i>Your output would be here...</i></div> 
+        <script>
+          const handleError = (err) => {
+            let message = "<div style='font-size: 20px;'>Runtime Error</div><br/>"+err;
+            console.error(message);
+          }
+          window.addEventListener('error', (event) => {
+            event.preventDefault();
+            handleError(event.error);
+          });
+          window.addEventListener('message', (event) => {
+            try {
+              eval(event.data);
+            } catch (err) {
+              handleError(err);
+            }
+          })
+        </script>
+        <script>
+          console = {
+            log(message) {
+              document.getElementById('root').innerHTML = message;
+              document.getElementById('root').style.color = 'white';
+            },
+            info(message) {
+              document.getElementById('root').innerHTML = message;
+              document.getElementById('root').style.color = 'orange';
+            },
+            error(message) {
+              document.getElementById('root').innerHTML = message;
+              document.getElementById('root').style.color = 'red';
+            }
+          }
+        </script>
+      </body>
+    </html>
+  `;
 
 // Component to display the main page of the application,
 // which contains the code editor and the list of connected clients
@@ -28,6 +73,7 @@ export const EditorHome = () => {
   // Reference to the current connected clients
   const [connectedUsers, setConnectedUsers] = useState([]);
   // Reference to the current page Navigation
+  const iframe = useRef();
 
   const reactNavigator = useNavigate();
   useEffect(() => {
@@ -104,52 +150,13 @@ export const EditorHome = () => {
     reactNavigator("/");
   }
 
-  // TODO : Format the result before showing up.
-  function formatOutput(result, isSuccess) {
-    if (!isSuccess) {
-      return `
-        <h3>Error: </h3><br>
-        {result}
-      `;
-    } else {
-      return `
-        <h3>Output: </h3><br>
-        {result}
-      `;
-    }
-  }
-
-  // TODO : Run the code in browser.
-  async function runCode() {
+  // TODO : Run the Other than JavaScript code in browser.
+  function runCode() {
     let code = codeRef.current || "console.log('No code to run')";
     let codeResultBox = document.querySelector(".code-result-box");
     codeResultBox.classList.remove("hide");
 
-    codeResultBox.innerHTML = "Code Running...";
-
-    console.log(code);
-    // let resp = await fetch("https://run.glot.io/languages/javascript/latest", {
-    //   method: "POST",
-    //   headers: {
-    //     "Content-Type": "application/json",
-    //   },
-    //   body: JSON.stringify({
-    //     files: [
-    //       {
-    //         name: "main.js",
-    //         content: code,
-    //       },
-    //     ],
-    //   }),
-    // });
-
-    // let result = await resp.json();
-
-    // if (result["stderr"]) {
-    //   codeResultBox.innerHTML = formatOutput(result["stderr"], false);
-    // } else {
-    //   codeResultBox.innerHTML = formatOutput(result["stdout"], true);
-    // }
+    iframe.current.contentWindow.postMessage(code, "*");
   }
 
   function hideCodeBox() {
@@ -202,6 +209,13 @@ export const EditorHome = () => {
             >
               X
             </button>
+            <iframe
+              className="code-result-iframe"
+              ref={iframe}
+              sandbox="allow-scripts"
+              title="result"
+              srcDoc={htmlContent}
+            ></iframe>
           </div>
           <div className="utility-buttons">
             <button className="btn copyBtn" onClick={copyRoomId}>
