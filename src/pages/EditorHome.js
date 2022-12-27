@@ -8,10 +8,55 @@ import {
   useNavigate,
   useParams,
 } from "react-router-dom";
+import "./codeRun.css";
 
 import Client from "../components/Client";
 import Editor from "../components/Editor";
 import { initSocket } from "../socket";
+
+let htmlContent = `
+    <html>
+        <head>
+          <style> html {color: white; } </style>
+        </head>
+      <body>
+        <div id="root"><i>Your output would be here...</i></div> 
+        <script>
+          const handleError = (err) => {
+            let message = "<div style='font-size: 20px;'>Runtime Error</div><br/>"+err;
+            console.error(message);
+          }
+          window.addEventListener('error', (event) => {
+            event.preventDefault();
+            handleError(event.error);
+          });
+          window.addEventListener('message', (event) => {
+            try {
+              eval(event.data);
+            } catch (err) {
+              handleError(err);
+            }
+          })
+        </script>
+        <script>
+          console = {
+            log(message) {
+              document.getElementById('root').innerHTML = message;
+              document.getElementById('root').style.color = 'white';
+            },
+            info(message) {
+              document.getElementById('root').innerHTML = message;
+              document.getElementById('root').style.color = 'orange';
+            },
+            error(message) {
+              document.getElementById('root').innerHTML = message;
+              document.getElementById('root').style.color = 'red';
+            }
+          }
+        </script>
+      </body>
+    </html>
+  `;
 
 // Component to display the main page of the application,
 // which contains the code editor and the list of connected clients
@@ -28,6 +73,7 @@ export const EditorHome = () => {
   // Reference to the current connected clients
   const [connectedUsers, setConnectedUsers] = useState([]);
   // Reference to the current page Navigation
+  const iframe = useRef();
 
   const reactNavigator = useNavigate();
   useEffect(() => {
@@ -104,6 +150,19 @@ export const EditorHome = () => {
     reactNavigator("/");
   }
 
+  // TODO : Run the Other than JavaScript code in browser.
+  function runCode() {
+    let code = codeRef.current || "console.log('No code to run')";
+    let codeResultBox = document.querySelector(".code-result-box");
+    codeResultBox.classList.remove("hide");
+
+    iframe.current.contentWindow.postMessage(code, "*");
+  }
+
+  function hideCodeBox() {
+    document.querySelector(".code-result-box").classList.add("hide");
+  }
+
   // Download the code to user's local machine as js file
   function downloadCode() {
     var content = codeRef.current;
@@ -138,6 +197,25 @@ export const EditorHome = () => {
                 );
               })}
             </div>
+          </div>
+          <button className="btn run-button" onClick={runCode} type="button">
+            Run
+          </button>
+          <div className="code-result-box hide">
+            <button
+              className="btn btn-danger"
+              onClick={hideCodeBox}
+              type="button"
+            >
+              X
+            </button>
+            <iframe
+              className="code-result-iframe"
+              ref={iframe}
+              sandbox="allow-scripts"
+              title="result"
+              srcDoc={htmlContent}
+            ></iframe>
           </div>
           <div className="utility-buttons">
             <button className="btn copyBtn" onClick={copyRoomId}>
