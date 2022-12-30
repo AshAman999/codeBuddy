@@ -37,7 +37,6 @@ https://codebuddytextedit.netlify.app/
 | Speciality             | Low Network Usage , Lightweight     |
 | Backend (Relay Server) | Node.js                             |
 
-
 ## Features
 
 - Need to create or join room to get started
