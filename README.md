@@ -42,6 +42,7 @@ https://codebuddytextedit.netlify.app/
 - Need to create or join room to get started
 - See all the users on the home screen
 - Ability to write code in collabration
+- Run code locally on the browsr itself to see the results (javascript only)
 - Low network Usablity<br><br>
   _More features coming soon_
 
