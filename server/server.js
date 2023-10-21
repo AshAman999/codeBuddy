@@ -35,10 +35,11 @@ io.on("connection", (socket) => {
       });
     });
 
-    socket.on("send-chat-message", (roomId, message) => {
+    socket.on("send-chat-message", (roomId, message, timeStamp) => {
       const messageData = {
         userName,
         message,
+        timeStamp,
       };
       socket.in(roomId).emit("chat-message", messageData);
     });
