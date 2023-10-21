@@ -15,7 +15,10 @@ import {
   DialogTitle,
   DialogActions,
   DialogContent,
+  Select,
+  MenuItem,
 } from "@mui/material";
+import { Chat, SaveAlt } from "@mui/icons-material";
 
 // Component to display the main page of the application,
 // which contains the code editor and the list of connected clients
@@ -150,16 +153,36 @@ export const EditorHome = () => {
 
   // Download the code to user's local machine as js file
   function downloadCode() {
-    var content = codeRef.current;
-    var filename = `codeBuddy_${roomId}.js`;
-    var blob = new Blob([content], {
-      type: "text/plain;charset=utf-8",
-    });
+    const content = codeRef.current;
+    const languageExtensions = {
+      javascript: "js",
+      python: "py",
+      typescript: "ts",
+      // Add more mappings if needed
+    };
+
+    const selectedLanguage = language || "txt";
+    const fileExtension = languageExtensions[selectedLanguage] || "txt"; // Use the selected language or default to "txt" if not found
+
+    const filename = `codeBuddy_${roomId}.${fileExtension}`;
+    const blob = new Blob([content], { type: "text/plain;charset=utf-8" });
     saveAs(blob, filename);
   }
+
   if (!location.state) {
     <Navigate to="/" />;
   }
+
+  const [theme, setTheme] = useState("light"); // State for the selected theme
+  const [language, setLanguage] = useState("javascript"); // State for the selected language
+
+  const handleThemeChange = (event) => {
+    setTheme(event.target.value);
+  };
+
+  const handleLanguageChange = (event) => {
+    setLanguage(event.target.value);
+  };
 
   return (
     <div className={styles.mainPage}>
@@ -173,13 +196,37 @@ export const EditorHome = () => {
         </div>
 
         <div className={styles.menus}>
-          <div>Dark</div>
-          <div className={styles.languageSwitcher}>
-            <div>JavaScript</div>
-          </div>
-          <div>Chat</div>
-          <div>Save Code</div>
-          <div onClick={runCode}>Run</div>
+          <Button
+            variant="outlined"
+            onClick={downloadCode}
+            startIcon={<SaveAlt />}>
+            Save Code
+          </Button>
+          <Select
+            sx={{ height: "35px" }}
+            value={theme}
+            onChange={handleThemeChange}
+            defaultValue={theme}>
+            <MenuItem value="light">Light Theme</MenuItem>
+            <MenuItem value="dark">Dark Theme</MenuItem>
+          </Select>
+
+          <Select
+            sx={{ height: "35px" }}
+            value={language}
+            onChange={handleLanguageChange}
+            defaultValue={language}>
+            <MenuItem value="javascript">JavaScript</MenuItem>
+            <MenuItem value="python">Python</MenuItem>
+            <MenuItem value="typescript">TypeScript</MenuItem>
+          </Select>
+          <Button variant="outlined" startIcon={<Chat />}>
+            Chat
+          </Button>
+
+          <Button variant="contained" onClick={runCode}>
+            Run
+          </Button>
 
           <Dialog open={popUp} onClose={handleClose} maxWidth="sm" fullWidth>
             <DialogTitle color={error ? "red" : "primary"}>
