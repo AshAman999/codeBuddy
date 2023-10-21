@@ -1,59 +1,48 @@
-import React, { useEffect, useRef } from "react";
-import Codemirror from "codemirror";
-import "codemirror/lib/codemirror.css";
-import "codemirror/theme/dracula.css";
-import "codemirror/mode/javascript/javascript";
-import "codemirror/addon/edit/closetag";
-import "codemirror/addon/edit/closebrackets";
+import React, { useEffect, useRef, useState } from "react";
+import MonacoEditor from "react-monaco-editor";
+import "monaco-editor/esm/vs/editor/editor.all.js"; // Import the Monaco Editor
 
-// Component to display the actual Code-editor
 const Editor = ({ socketRef, roomId, onCodeChange }) => {
-  const editorRef = useRef(null);
-  useEffect(() => {
-    // CodeMirror instance given to id "realTimeEditor"
-    async function init() {
-      editorRef.current = Codemirror.fromTextArea(
-        document.getElementById("realTimeEditor"),
-        {
-          // Configurations for the code editor
-          mode: { name: "javascript", json: true },
-          theme: "dracula",
-          autoCloseTags: true,
-          autoCloseBrackets: true,
-          lineNumbers: true,
-        }
-      );
-      // Emit the changes to the server to be broadcasted to other users
-      editorRef.current.on("change", (instance, changes) => {
-        const { origin } = changes;
-        const code = instance.getValue();
-        onCodeChange(code);
-        if (origin !== "setValue") {
-          socketRef.current.emit("CodeChange", {
-            roomId,
-            code,
-          });
-        }
-      });
-    }
-    init();
-  }, []);
-  // Listen for code changes from other users and update the editor accordingly
+  const [code, setCode] = useState("");
+
+  const handleEditorChange = (newValue) => {
+    setCode(newValue); // Update the local state first
+    onCodeChange(newValue);
+
+    // Emit the changes to the server to be broadcasted to other users
+    socketRef.current.emit("CodeChange", {
+      roomId,
+      code: newValue,
+    });
+  };
+
   useEffect(() => {
     if (socketRef.current) {
-      socketRef.current.on("CodeChange", ({ code }) => {
-        if (code !== null) {
-          editorRef.current.setValue(code);
+      socketRef.current.on("CodeChange", ({ code: newCode }) => {
+        if (newCode !== null) {
+          setCode(newCode);
         }
       });
     }
-    // Unsibscribe from the socket event [CodeChange] when the component unmounts
+
+    // Unsubscribe from the socket event [CodeChange] when the component unmounts
     return () => {
       socketRef.current.off("CodeChange");
     };
   }, [socketRef.current]);
 
-  return <textarea id="realTimeEditor"></textarea>;
+  return (
+    <MonacoEditor
+      width="800" // You can adjust the width as needed
+      height="400"
+      language="javascript"
+      theme="vs-light" // Change the theme as needed
+      value={code} // Initial code value
+      onChange={(e) => {
+        handleEditorChange(e);
+      }}
+    />
+  );
 };
 
 export default Editor;

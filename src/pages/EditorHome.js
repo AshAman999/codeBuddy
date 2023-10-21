@@ -192,8 +192,7 @@ export const EditorHome = () => {
                 return (
                   <Client
                     key={client.socketId}
-                    userName={client.userName}
-                  ></Client>
+                    userName={client.userName}></Client>
                 );
               })}
             </div>
@@ -205,8 +204,7 @@ export const EditorHome = () => {
             <button
               className="btn btn-danger"
               onClick={hideCodeBox}
-              type="button"
-            >
+              type="button">
               X
             </button>
             <iframe
@@ -214,8 +212,7 @@ export const EditorHome = () => {
               ref={iframe}
               sandbox="allow-scripts"
               title="result"
-              srcDoc={htmlContent}
-            ></iframe>
+              srcDoc={htmlContent}></iframe>
           </div>
           <div className="utility-buttons">
             <button className="btn copyBtn" onClick={copyRoomId}>
@@ -231,8 +228,8 @@ export const EditorHome = () => {
         <Editor
           socketRef={socketRef}
           roomId={roomId}
-          onCodeChange={(code) => {
-            codeRef.current = code;
+          onCodeChange={(newCode) => {
+            codeRef.current = newCode;
           }}
         />
       </div>
