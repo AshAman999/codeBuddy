@@ -58,7 +58,7 @@ const Editor = ({ socketRef, roomId, onCodeChange }) => {
         width="100%" // Make the width 100% of the available space
         height="100vh" // Make the height 100% of the available space
         language="javascript"
-        theme="vs-dark"
+        theme="vs-light"
         value={code}
         onChange={(e) => {
           handleEditorChange(e);

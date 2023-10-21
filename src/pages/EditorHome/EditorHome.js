@@ -5,9 +5,10 @@ import { FaDownload } from "react-icons/fa";
 import { Navigate, useLocation, useNavigate } from "react-router-dom";
 import "./codeRun.css";
 
-import Client from "../components/Client";
-import Editor from "../components/Editor";
-import { initSocket } from "../socket";
+import Client from "../../components/Client";
+import Editor from "../../components/Editor";
+import { initSocket } from "../../socket";
+import styles from "./EditorHome.module.css";
 
 let htmlContent = `
     <html>
@@ -174,13 +175,32 @@ export const EditorHome = () => {
   }
 
   return (
-    <Editor
-      socketRef={socketRef}
-      roomId={roomId}
-      onCodeChange={(newCode) => {
-        codeRef.current = newCode;
-      }}
-    />
+    <div className={styles.mainPage}>
+      <div className={styles.topBar}>
+        <div className={styles.users}>
+          {connectedUsers.map((client) => {
+            return (
+              <Client key={client.socketId} userName={client.userName}></Client>
+            );
+          })}
+        </div>
+
+        <div className={styles.menus}>
+          <div>Dark</div>
+          <div className={styles.languageSwitcher}>
+            <div>JavaScript</div>
+          </div>
+          <div>Chat</div>
+        </div>
+      </div>
+      <Editor
+        socketRef={socketRef}
+        roomId={roomId}
+        onCodeChange={(newCode) => {
+          codeRef.current = newCode;
+        }}
+      />
+    </div>
   );
   return (
     <div className="mainWrap">

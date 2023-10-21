@@ -1,7 +1,7 @@
 import React from "react";
 import { useLocation } from "react-router-dom";
 import NamePrompt from "./NamePrompt";
-import EditorHome from "../EditorHome";
+import EditorHome from "../EditorHome/EditorHome";
 
 function UserNameCheck() {
   const location = useLocation();
