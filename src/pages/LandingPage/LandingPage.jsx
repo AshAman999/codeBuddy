@@ -36,7 +36,7 @@ function LandingPage() {
       return;
     } else {
       toast.success("Room joined successfully");
-      navigate(`/editorHome/${roomId}`, {
+      navigate(`/editorHome?roomId=${roomId}`, {
         state: {
           userName,
         },
