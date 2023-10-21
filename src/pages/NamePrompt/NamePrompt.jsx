@@ -1,13 +1,17 @@
 import React, { useState } from "react";
 import styles from "./NamePrompt.module.css";
 import { Button, TextField } from "@mui/material";
-import { useNavigate } from "react-router-dom";
+import { useLocation, useNavigate } from "react-router-dom";
 import { useParams } from "react-router-dom"; // Import useParams
 import toast from "react-hot-toast";
 
 function NamePrompt() {
   const navigate = useNavigate();
-  const { roomId } = useParams(); // Get roomId from URL parameters
+  const location = useLocation();
+  const searchParams = new URLSearchParams(location.search);
+  const roomId = searchParams.get("roomId");
+
+  console.log("roomId", roomId);
 
   // Hook to store the current user name
   const [userName, setUserName] = useState("");
@@ -31,6 +35,7 @@ function NamePrompt() {
   return (
     <div className={styles.landingPage}>
       <div className={styles.fillDetailBox}>
+        <img src="./logo.png"></img>
         <TextField
           className={styles.inputBox}
           placeholder="Enter Your Name"

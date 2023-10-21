@@ -2,12 +2,7 @@ import { saveAs } from "file-saver";
 import { React, useEffect, useRef, useState } from "react";
 import toast from "react-hot-toast";
 import { FaDownload } from "react-icons/fa";
-import {
-  Navigate,
-  useLocation,
-  useNavigate,
-  useParams,
-} from "react-router-dom";
+import { Navigate, useLocation, useNavigate } from "react-router-dom";
 import "./codeRun.css";
 
 import Client from "../components/Client";
@@ -69,7 +64,9 @@ export const EditorHome = () => {
   // Reference to the current webpage URL
   const location = useLocation();
   // Reference to the current room Joined
-  const { roomId } = useParams();
+  const searchParams = new URLSearchParams(location.search);
+  // Get roomId from url search Param
+  const roomId = searchParams.get("roomId");
   // Reference to the current connected clients
   const [connectedUsers, setConnectedUsers] = useState([]);
   // Reference to the current page Navigation
