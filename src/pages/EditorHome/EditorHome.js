@@ -179,7 +179,7 @@ export const EditorHome = () => {
 
   // TODO : Run the Other than JavaScript code in browser.
   function runCode() {
-    if (language.name.value != languages.javascript.value) {
+    if (language != languages.javascript.value) {
       setError(true);
       setResult("Currently Only JavaScript is Supported");
       setPopUp(true);
@@ -201,8 +201,9 @@ export const EditorHome = () => {
         console.log = originalConsoleLog; // Restore the original console.log
 
         // Set the captured output in state for display
-        setResult(output.join("\n"));
+        const result = output.join("\n");
         console.log(result);
+        setResult(result);
         setPopUp(true);
       } catch (error) {
         setError(true);
