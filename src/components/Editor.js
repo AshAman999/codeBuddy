@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import MonacoEditor from "react-monaco-editor";
+import Editor from "@monaco-editor/react";
 import "monaco-editor/esm/vs/editor/editor.all.js"; // Import the Monaco Editor
 
 const options = {
@@ -24,7 +24,7 @@ const options = {
   automaticLayout: true,
 };
 
-const Editor = ({ socketRef, roomId, onCodeChange }) => {
+const TextEditor = ({ socketRef, roomId, onCodeChange }) => {
   const [code, setCode] = useState("");
 
   const handleEditorChange = (newValue) => {
@@ -53,12 +53,12 @@ const Editor = ({ socketRef, roomId, onCodeChange }) => {
 
   return (
     <div className="editor-container">
-      <MonacoEditor
+      <Editor
         options={options}
         width="100%" // Make the width 100% of the available space
         height="100vh" // Make the height 100% of the available space
         language="javascript"
-        theme="vs-light"
+        theme="light"
         value={code}
         onChange={(e) => {
           handleEditorChange(e);
@@ -68,4 +68,4 @@ const Editor = ({ socketRef, roomId, onCodeChange }) => {
   );
 };
 
-export default Editor;
+export default TextEditor;

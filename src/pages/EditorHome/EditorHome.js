@@ -5,7 +5,7 @@ import { Navigate, useLocation, useNavigate } from "react-router-dom";
 import "./codeRun.css";
 
 import Client from "../../components/Client";
-import Editor from "../../components/Editor";
+import TextEditor from "../../components/Editor";
 import { initSocket } from "../../socket";
 import styles from "./EditorHome.module.css";
 import {
@@ -278,7 +278,7 @@ export const EditorHome = () => {
           </Dialog>
         </div>
       </div>
-      <Editor
+      <TextEditor
         socketRef={socketRef}
         roomId={roomId}
         language={language}
