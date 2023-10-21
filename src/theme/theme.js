@@ -1,17 +1,14 @@
 import { createTheme, ThemeProvider } from "@mui/material";
-import { blue, deepOrange, green, pink, teal } from "@mui/material/colors";
+import { blue, teal, pink, deepOrange, green } from "@mui/material/colors";
 import React from "react";
 
 const baseTheme = createTheme({
   typography: {
-    // body1: {
-    //   fontSize: 12,
-    //   fontWeight: 600,
-    // },
+    fontFamily: "'Arial', sans-serif",
   },
   palette: {
-    primary: pink,
-    secondary: deepOrange,
+    primary: blue,
+    secondary: teal,
   },
 });
 
@@ -20,7 +17,9 @@ const customTheme = (theme) =>
     ...theme,
     palette: {
       ...theme.palette,
-      primary: green,
+      primary: pink,
+      secondary: deepOrange,
+      success: green,
     },
   });
 
