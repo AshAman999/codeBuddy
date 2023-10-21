@@ -37,7 +37,7 @@
     max-width: 95%;
     /* Adjust the width as needed */
     flex-direction: column;
-    align-items: flex-start;
+    align-items: flex-end;
 }
 
 .otherMessageOther {
@@ -46,9 +46,8 @@
     max-width: 95%;
     justify-content: flex-start;
     flex-wrap: wrap;
-
     flex-direction: column;
-    align-items: flex-end;
+    align-items: flex-start;
 }
 
 .myMessage {
