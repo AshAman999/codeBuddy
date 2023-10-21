@@ -74,7 +74,7 @@ const languages = {
 };
 
 export const EditorHome = () => {
-  const [theme, setTheme] = useState(CodeEditorTheme.dark.value); // State for the selected theme
+  const [theme, setTheme] = useState(CodeEditorTheme.light.value); // State for the selected theme
   const [language, setLanguage] = useState(languages.javascript.value); // State for the selected language
 
   // Socket reference to be used in the Editor component
@@ -194,7 +194,7 @@ export const EditorHome = () => {
         // Set the captured output in state for display
         const result = output.join("\n");
         console.log(result);
-        setResult(output);
+        setResult(result);
         setPopUp(true);
       } catch (error) {
         setError(true);
@@ -311,11 +311,7 @@ export const EditorHome = () => {
               {error ? "Some error Occured" : "Run Sucessfully"}
             </DialogTitle>
             <DialogContent>
-              {result && result.length > 0 ? (
-                result.map((element, index) => <p key={index}>{element}</p>)
-              ) : (
-                <p>No results to display</p>
-              )}
+              <p>{result}</p>
             </DialogContent>
             <DialogActions>
               <Button onClick={handleClose} color="primary" size="small">
