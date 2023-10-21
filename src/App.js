@@ -14,8 +14,7 @@ function App() {
       </div>
       <BrowserRouter>
         <Routes>
-          <Route path="/" element={<HomePage />} />
-          {/* <Route path="/editorHome/roomId:roomId" element={<EditorHome />} /> */}
+          <Route path="/" element={<LandingPage />} />
           <Route path="/x" element={<LandingPage />} />
           <Route path="/y" element={<NamePrompt />} />
           <Route path="/editorHome" element={<UserNameCheck />} />
