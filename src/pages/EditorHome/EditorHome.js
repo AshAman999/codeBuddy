@@ -1,7 +1,6 @@
 import { saveAs } from "file-saver";
 import { React, useEffect, useRef, useState } from "react";
 import toast from "react-hot-toast";
-import { FaDownload } from "react-icons/fa";
 import { Navigate, useLocation, useNavigate } from "react-router-dom";
 import "./codeRun.css";
 
@@ -197,13 +196,14 @@ export const EditorHome = () => {
 
         <div className={styles.menus}>
           <Button
+            size="small"
             variant="outlined"
             onClick={downloadCode}
             startIcon={<SaveAlt />}>
             Save Code
           </Button>
           <Select
-            sx={{ height: "35px" }}
+            size="small"
             value={theme}
             onChange={handleThemeChange}
             defaultValue={theme}>
@@ -212,7 +212,7 @@ export const EditorHome = () => {
           </Select>
 
           <Select
-            sx={{ height: "35px" }}
+            size="small"
             value={language}
             onChange={handleLanguageChange}
             defaultValue={language}>
@@ -220,11 +220,11 @@ export const EditorHome = () => {
             <MenuItem value="python">Python</MenuItem>
             <MenuItem value="typescript">TypeScript</MenuItem>
           </Select>
-          <Button variant="outlined" startIcon={<Chat />}>
+          <Button variant="outlined" startIcon={<Chat />} size="small">
             Chat
           </Button>
 
-          <Button variant="contained" onClick={runCode}>
+          <Button variant="contained" onClick={runCode} size="small">
             Run
           </Button>
 
@@ -236,7 +236,7 @@ export const EditorHome = () => {
               <p>{result}</p>
             </DialogContent>
             <DialogActions>
-              <Button onClick={handleClose} color="primary">
+              <Button onClick={handleClose} color="primary" size="small">
                 Close
               </Button>
             </DialogActions>

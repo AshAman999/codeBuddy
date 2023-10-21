@@ -10,18 +10,21 @@
     flex-direction: row;
     gap: 10px;
     justify-content: space-between;
+    flex-wrap: wrap;
 }
 
 .users {
     display: flex;
     flex-direction: row;
     gap: 10px;
+    flex-wrap: wrap;
 }
 
 .menus {
     display: flex;
     flex-direction: row;
     gap: 10px;
+    flex-wrap: wrap;
 }
 
 .languageSwitcher {
