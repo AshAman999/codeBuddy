@@ -24,7 +24,7 @@ const options = {
   automaticLayout: true,
 };
 
-const TextEditor = ({ socketRef, roomId, onCodeChange }) => {
+const TextEditor = ({ socketRef, roomId, onCodeChange, theme, language }) => {
   const [code, setCode] = useState("");
 
   const handleEditorChange = (newValue) => {
@@ -57,8 +57,8 @@ const TextEditor = ({ socketRef, roomId, onCodeChange }) => {
         options={options}
         width="100%" // Make the width 100% of the available space
         height="100vh" // Make the height 100% of the available space
-        language="javascript"
-        theme="light"
+        language={language}
+        theme={theme}
         value={code}
         onChange={(e) => {
           handleEditorChange(e);

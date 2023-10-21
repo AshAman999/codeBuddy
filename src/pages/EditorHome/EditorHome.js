@@ -32,7 +32,60 @@ const useStyles = makeStyles({
 // Component to display the main page of the application,
 // which contains the code editor and the list of connected clients
 
+const CodeEditorTheme = {
+  light: {
+    name: "Light",
+    value: "light",
+  },
+  dark: {
+    name: "Dark",
+    value: "vs-dark",
+  },
+  // Add more themes here
+};
+
+const languages = {
+  python: {
+    name: "Python",
+    extension: "py",
+    value: "python",
+  },
+  javascript: {
+    name: "JavaScript",
+    extension: "js",
+    value: "javascript",
+  },
+  go: {
+    name: "Go",
+    extension: "go",
+    value: "go",
+  },
+  c: {
+    name: "C",
+    extension: "c",
+    value: "c",
+  },
+  java: {
+    name: "Java",
+    extension: "java",
+    value: "java",
+  },
+  cplusplus: {
+    name: "C++",
+    extension: "cpp",
+    value: "cpp",
+  },
+  csharp: {
+    name: "C#",
+    extension: "cs",
+    value: "csharp",
+  },
+};
+
 export const EditorHome = () => {
+  const [theme, setTheme] = useState(CodeEditorTheme.dark.value); // State for the selected theme
+  const [language, setLanguage] = useState(languages.javascript.value); // State for the selected language
+
   // Socket reference to be used in the Editor component
   const socketRef = useRef(null);
   // Reference to the code editor's value
@@ -126,31 +179,37 @@ export const EditorHome = () => {
 
   // TODO : Run the Other than JavaScript code in browser.
   function runCode() {
-    try {
-      let code = codeRef.current || "console.log('No code to run')";
-      const codeWithReturn = `(function() { ${code} })();`;
-      const originalConsoleLog = console.log; // Preserve the original console.log
-      const output = [];
-
-      // Override console.log to capture the output
-      console.log = (value) => {
-        output.push(value);
-        originalConsoleLog(value);
-      };
-
-      eval(codeWithReturn); // Execute the code
-
-      console.log = originalConsoleLog; // Restore the original console.log
-
-      // Set the captured output in state for display
-      setResult(output.join("\n"));
-      console.log(result);
-      setPopUp(true);
-    } catch (error) {
+    if (language.name.value != languages.javascript.value) {
       setError(true);
-      console.error("An error occurred while running the code:", error);
-      setResult(error.message);
+      setResult("Currently Only JavaScript is Supported");
       setPopUp(true);
+    } else {
+      try {
+        let code = codeRef.current || "console.log('No code to run')";
+        const codeWithReturn = `(function() { ${code} })();`;
+        const originalConsoleLog = console.log; // Preserve the original console.log
+        const output = [];
+
+        // Override console.log to capture the output
+        console.log = (value) => {
+          output.push(value);
+          originalConsoleLog(value);
+        };
+
+        eval(codeWithReturn); // Execute the code
+
+        console.log = originalConsoleLog; // Restore the original console.log
+
+        // Set the captured output in state for display
+        setResult(output.join("\n"));
+        console.log(result);
+        setPopUp(true);
+      } catch (error) {
+        setError(true);
+        console.error("An error occurred while running the code:", error);
+        setResult(error.message);
+        setPopUp(true);
+      }
     }
   }
 
@@ -163,15 +222,7 @@ export const EditorHome = () => {
   // Download the code to user's local machine as js file
   function downloadCode() {
     const content = codeRef.current;
-    const languageExtensions = {
-      javascript: "js",
-      python: "py",
-      typescript: "ts",
-      // Add more mappings if needed
-    };
-
-    const selectedLanguage = language || "txt";
-    const fileExtension = languageExtensions[selectedLanguage] || "txt"; // Use the selected language or default to "txt" if not found
+    const fileExtension = language.extension || "txt"; // Use the selected language or default to "txt" if not found
 
     const filename = `codeBuddy_${roomId}.${fileExtension}`;
     const blob = new Blob([content], { type: "text/plain;charset=utf-8" });
@@ -181,9 +232,6 @@ export const EditorHome = () => {
   if (!location.state) {
     <Navigate to="/" />;
   }
-
-  const [theme, setTheme] = useState("light"); // State for the selected theme
-  const [language, setLanguage] = useState("javascript"); // State for the selected language
 
   const handleThemeChange = (event) => {
     setTheme(event.target.value);
@@ -219,8 +267,11 @@ export const EditorHome = () => {
             value={theme}
             onChange={handleThemeChange}
             defaultValue={theme}>
-            <MenuItem value="light">Light Theme</MenuItem>
-            <MenuItem value="dark">Dark Theme</MenuItem>
+            {Object.keys(CodeEditorTheme).map((themeKey) => (
+              <MenuItem key={themeKey} value={CodeEditorTheme[themeKey].value}>
+                {CodeEditorTheme[themeKey].name}
+              </MenuItem>
+            ))}
           </Select>
 
           <Select
@@ -228,9 +279,11 @@ export const EditorHome = () => {
             value={language}
             onChange={handleLanguageChange}
             defaultValue={language}>
-            <MenuItem value="javascript">JavaScript</MenuItem>
-            <MenuItem value="python">Python</MenuItem>
-            <MenuItem value="typescript">TypeScript</MenuItem>
+            {Object.keys(languages).map((languageKey) => (
+              <MenuItem key={languageKey} value={languages[languageKey].value}>
+                {languages[languageKey].name}
+              </MenuItem>
+            ))}
           </Select>
           <Button variant="outlined" startIcon={<Chat />} size="small">
             Chat
