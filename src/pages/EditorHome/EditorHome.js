@@ -9,50 +9,13 @@ import Client from "../../components/Client";
 import Editor from "../../components/Editor";
 import { initSocket } from "../../socket";
 import styles from "./EditorHome.module.css";
-
-let htmlContent = `
-    <html>
-        <head>
-          <style> html {color: white; } </style>
-        </head>
-      <body>
-        <div id="root"><i>Your output would be here...</i></div> 
-        <script>
-          const handleError = (err) => {
-            let message = "<div style='font-size: 20px;'>Runtime Error</div><br/>"+err;
-            console.error(message);
-          }
-          window.addEventListener('error', (event) => {
-            event.preventDefault();
-            handleError(event.error);
-          });
-          window.addEventListener('message', (event) => {
-            try {
-              eval(event.data);
-            } catch (err) {
-              handleError(err);
-            }
-          })
-        </script>
-        <script>
-          console = {
-            log(message) {
-              document.getElementById('root').innerHTML = message;
-              document.getElementById('root').style.color = 'white';
-            },
-            info(message) {
-              document.getElementById('root').innerHTML = message;
-              document.getElementById('root').style.color = 'orange';
-            },
-            error(message) {
-              document.getElementById('root').innerHTML = message;
-              document.getElementById('root').style.color = 'red';
-            }
-          }
-        </script>
-      </body>
-    </html>
-  `;
+import {
+  Button,
+  Dialog,
+  DialogTitle,
+  DialogActions,
+  DialogContent,
+} from "@mui/material";
 
 // Component to display the main page of the application,
 // which contains the code editor and the list of connected clients
@@ -70,8 +33,6 @@ export const EditorHome = () => {
   const roomId = searchParams.get("roomId");
   // Reference to the current connected clients
   const [connectedUsers, setConnectedUsers] = useState([]);
-  // Reference to the current page Navigation
-  const iframe = useRef();
 
   const reactNavigator = useNavigate();
   useEffect(() => {
@@ -147,18 +108,44 @@ export const EditorHome = () => {
   function leaveRoom() {
     reactNavigator("/");
   }
+  const [result, setResult] = useState(null);
+  const [error, setError] = useState(false);
+  const [popUp, setPopUp] = useState(false);
 
   // TODO : Run the Other than JavaScript code in browser.
   function runCode() {
-    let code = codeRef.current || "console.log('No code to run')";
-    let codeResultBox = document.querySelector(".code-result-box");
-    codeResultBox.classList.remove("hide");
+    try {
+      let code = codeRef.current || "console.log('No code to run')";
+      const codeWithReturn = `(function() { ${code} })();`;
+      const originalConsoleLog = console.log; // Preserve the original console.log
+      const output = [];
 
-    iframe.current.contentWindow.postMessage(code, "*");
+      // Override console.log to capture the output
+      console.log = (value) => {
+        output.push(value);
+        originalConsoleLog(value);
+      };
+
+      eval(codeWithReturn); // Execute the code
+
+      console.log = originalConsoleLog; // Restore the original console.log
+
+      // Set the captured output in state for display
+      setResult(output.join("\n"));
+      console.log(result);
+      setPopUp(true);
+    } catch (error) {
+      setError(true);
+      console.error("An error occurred while running the code:", error);
+      setResult(error.message);
+      setPopUp(true);
+    }
   }
 
-  function hideCodeBox() {
-    document.querySelector(".code-result-box").classList.add("hide");
+  function handleClose() {
+    setResult(null);
+    setPopUp(false);
+    setError(false);
   }
 
   // Download the code to user's local machine as js file
@@ -191,6 +178,22 @@ export const EditorHome = () => {
             <div>JavaScript</div>
           </div>
           <div>Chat</div>
+          <div>Save Code</div>
+          <div onClick={runCode}>Run</div>
+
+          <Dialog open={popUp} onClose={handleClose} maxWidth="sm" fullWidth>
+            <DialogTitle color={error ? "red" : "primary"}>
+              {error ? "Some error Occured" : "Run Sucessfully"}
+            </DialogTitle>
+            <DialogContent>
+              <p>{result}</p>
+            </DialogContent>
+            <DialogActions>
+              <Button onClick={handleClose} color="primary">
+                Close
+              </Button>
+            </DialogActions>
+          </Dialog>
         </div>
       </div>
       <Editor
@@ -200,66 +203,6 @@ export const EditorHome = () => {
           codeRef.current = newCode;
         }}
       />
-    </div>
-  );
-  return (
-    <div className="mainWrap">
-      <div className="aside">
-        <div className="asideInner">
-          <div className="user-info">
-            <div className="connected-heading">
-              Connected ({connectedUsers.length})
-              <FaDownload
-                className="download-code-btn"
-                onClick={downloadCode}
-              />
-            </div>
-            <div className="clientList">
-              {connectedUsers.map((client) => {
-                return (
-                  <Client
-                    key={client.socketId}
-                    userName={client.userName}></Client>
-                );
-              })}
-            </div>
-          </div>
-          <button className="btn run-button" onClick={runCode} type="button">
-            Run
-          </button>
-          <div className="code-result-box hide">
-            <button
-              className="btn btn-danger"
-              onClick={hideCodeBox}
-              type="button">
-              X
-            </button>
-            <iframe
-              className="code-result-iframe"
-              ref={iframe}
-              sandbox="allow-scripts"
-              title="result"
-              srcDoc={htmlContent}></iframe>
-          </div>
-          <div className="utility-buttons">
-            <button className="btn copyBtn" onClick={copyRoomId}>
-              Copy Room Id
-            </button>
-            <button className="btn leaveBtn" onClick={leaveRoom}>
-              Leave
-            </button>
-          </div>
-        </div>
-      </div>
-      <div className="editorWrap">
-        <Editor
-          socketRef={socketRef}
-          roomId={roomId}
-          onCodeChange={(newCode) => {
-            codeRef.current = newCode;
-          }}
-        />
-      </div>
     </div>
   );
 };
