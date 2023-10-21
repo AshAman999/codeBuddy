@@ -18,6 +18,16 @@ import {
   MenuItem,
 } from "@mui/material";
 import { Chat, SaveAlt } from "@mui/icons-material";
+import { makeStyles } from "@mui/styles";
+
+const useStyles = makeStyles({
+  topScrollPaper: {
+    alignItems: "flex-start",
+  },
+  topPaperScrollBody: {
+    verticalAlign: "top",
+  },
+});
 
 // Component to display the main page of the application,
 // which contains the code editor and the list of connected clients
@@ -183,6 +193,8 @@ export const EditorHome = () => {
     setLanguage(event.target.value);
   };
 
+  const classes = useStyles();
+
   return (
     <div className={styles.mainPage}>
       <div className={styles.topBar}>
@@ -224,6 +236,29 @@ export const EditorHome = () => {
             Chat
           </Button>
 
+          <Dialog
+            open={false}
+            onClose={handleClose}
+            maxWidth="sm"
+            fullWidth
+            // scroll="paper"
+            PaperProps={{ sx: { mt: "50px", verticalAlign: "top" } }}>
+            <DialogTitle>Chats</DialogTitle>
+            <DialogContent
+              sx={
+                {
+                  // height: "100vh",
+                }
+              }>
+              {"1"}
+            </DialogContent>
+            <DialogActions>
+              <Button onClick={handleClose} color="primary" size="small">
+                Close
+              </Button>
+            </DialogActions>
+          </Dialog>
+
           <Button variant="contained" onClick={runCode} size="small">
             Run
           </Button>
@@ -246,6 +281,8 @@ export const EditorHome = () => {
       <Editor
         socketRef={socketRef}
         roomId={roomId}
+        language={language}
+        theme={theme}
         onCodeChange={(newCode) => {
           codeRef.current = newCode;
         }}
