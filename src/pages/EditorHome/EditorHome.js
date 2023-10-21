@@ -181,7 +181,7 @@ export const EditorHome = () => {
   function runCode() {
     if (language != languages.javascript.value) {
       setError(true);
-      setResult("Currently Only JavaScript is Supported");
+      setResult(["Currently Only JavaScript is Supported"]);
       setPopUp(true);
     } else {
       try {
@@ -203,12 +203,12 @@ export const EditorHome = () => {
         // Set the captured output in state for display
         const result = output.join("\n");
         console.log(result);
-        setResult(result);
+        setResult(output);
         setPopUp(true);
       } catch (error) {
         setError(true);
         console.error("An error occurred while running the code:", error);
-        setResult(error.message);
+        setResult([error.message]);
         setPopUp(true);
       }
     }
@@ -322,7 +322,11 @@ export const EditorHome = () => {
               {error ? "Some error Occured" : "Run Sucessfully"}
             </DialogTitle>
             <DialogContent>
-              <p>{result}</p>
+              {result && result.length > 0 ? (
+                result.map((element, index) => <p key={index}>{element}</p>)
+              ) : (
+                <p>No results to display</p>
+              )}
             </DialogContent>
             <DialogActions>
               <Button onClick={handleClose} color="primary" size="small">
