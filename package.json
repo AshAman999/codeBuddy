@@ -8,6 +8,7 @@
     "@monaco-editor/react": "^4.6.0",
     "@mui/icons-material": "^5.14.14",
     "@mui/material": "^5.14.14",
+    "@mui/styles": "^5.14.14",
     "@testing-library/jest-dom": "^5.16.5",
     "@testing-library/react": "12.1.2",
     "@testing-library/user-event": "^13.5.0",
