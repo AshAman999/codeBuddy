@@ -172,6 +172,16 @@ export const EditorHome = () => {
   if (!location.state) {
     <Navigate to="/" />;
   }
+
+  return (
+    <Editor
+      socketRef={socketRef}
+      roomId={roomId}
+      onCodeChange={(newCode) => {
+        codeRef.current = newCode;
+      }}
+    />
+  );
   return (
     <div className="mainWrap">
       <div className="aside">

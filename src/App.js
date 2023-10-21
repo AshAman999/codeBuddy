@@ -1,7 +1,5 @@
 import "./App.css";
-import { BrowserRouter, Routes, Route, useLocation } from "react-router-dom";
-import { HomePage } from "./pages/Home";
-import { EditorHome } from "./pages/EditorHome";
+import { BrowserRouter, Routes, Route } from "react-router-dom";
 import { Toaster } from "react-hot-toast";
 import LandingPage from "./pages/LandingPage/LandingPage";
 import NamePrompt from "./pages/NamePrompt/NamePrompt";
