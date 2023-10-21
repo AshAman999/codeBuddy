@@ -32,3 +32,16 @@
     flex-direction: row;
     gap: 10px;
 }
+
+.EditorNChat {
+    display: flex;
+    width: auto;
+}
+
+.editorArea{
+    width: 100%;
+}
+
+.chatArea {
+    width: 20%;
+}

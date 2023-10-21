@@ -56,7 +56,7 @@ const TextEditor = ({ socketRef, roomId, onCodeChange, theme, language }) => {
       <Editor
         options={options}
         width="100%" // Make the width 100% of the available space
-        height="100vh" // Make the height 100% of the available space
+        height="calc(100vh - 60px)" // Make the height 100% of the available space
         language={language}
         theme={theme}
         value={code}

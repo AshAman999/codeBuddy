@@ -18,6 +18,7 @@ import {
   MenuItem,
 } from "@mui/material";
 import { Chat, SaveAlt } from "@mui/icons-material";
+import Chats from "../../components/Chat/Chats";
 
 // Component to display the main page of the application,
 // which contains the code editor and the list of connected clients
@@ -324,15 +325,27 @@ export const EditorHome = () => {
           </Dialog>
         </div>
       </div>
-      <TextEditor
-        socketRef={socketRef}
-        roomId={roomId}
-        language={language}
-        theme={theme}
-        onCodeChange={(newCode) => {
-          codeRef.current = newCode;
-        }}
-      />
+      <div className={styles.EditorNChat}>
+        <div className={styles.editorArea}>
+          <TextEditor
+            socketRef={socketRef}
+            roomId={roomId}
+            language={language}
+            theme={theme}
+            onCodeChange={(newCode) => {
+              codeRef.current = newCode;
+            }}
+          />
+        </div>
+
+        <div className={styles.chatArea}>
+          <Chats
+            roomId={roomId}
+            userName={location.state?.userName}
+            socketRef={socketRef}
+          />
+        </div>
+      </div>
     </div>
   );
 };
