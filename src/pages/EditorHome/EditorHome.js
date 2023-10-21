@@ -18,16 +18,6 @@ import {
   MenuItem,
 } from "@mui/material";
 import { Chat, SaveAlt } from "@mui/icons-material";
-import { makeStyles } from "@mui/styles";
-
-const useStyles = makeStyles({
-  topScrollPaper: {
-    alignItems: "flex-start",
-  },
-  topPaperScrollBody: {
-    verticalAlign: "top",
-  },
-});
 
 // Component to display the main page of the application,
 // which contains the code editor and the list of connected clients
@@ -179,7 +169,7 @@ export const EditorHome = () => {
 
   // TODO : Run the Other than JavaScript code in browser.
   function runCode() {
-    if (language != languages.javascript.value) {
+    if (language !== languages.javascript.value) {
       setError(true);
       setResult(["Currently Only JavaScript is Supported"]);
       setPopUp(true);
@@ -241,8 +231,6 @@ export const EditorHome = () => {
   const handleLanguageChange = (event) => {
     setLanguage(event.target.value);
   };
-
-  const classes = useStyles();
 
   return (
     <div className={styles.mainPage}>

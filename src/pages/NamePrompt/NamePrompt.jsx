@@ -2,7 +2,6 @@ import React, { useState } from "react";
 import styles from "./NamePrompt.module.css";
 import { Button, TextField } from "@mui/material";
 import { useLocation, useNavigate } from "react-router-dom";
-import { useParams } from "react-router-dom"; // Import useParams
 import toast from "react-hot-toast";
 
 function NamePrompt() {
@@ -35,7 +34,7 @@ function NamePrompt() {
   return (
     <div className={styles.landingPage}>
       <div className={styles.fillDetailBox}>
-        <img src="./logo.png"></img>
+        <img src="./logo.png" alt="logo"></img>
         <TextField
           className={styles.inputBox}
           placeholder="Enter Your Name"

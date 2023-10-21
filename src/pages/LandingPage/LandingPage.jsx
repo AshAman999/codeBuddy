@@ -47,7 +47,7 @@ function LandingPage() {
   return (
     <div className={styles.landingPage}>
       <div className={styles.fillDetailBox}>
-        <img src="./logo.png"></img>
+        <img src="./logo.png" alt="logo"></img>
         <TextField
           className={styles.inputBox}
           placeholder="Enter Room Code"
