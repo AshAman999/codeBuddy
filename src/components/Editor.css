@@ -6,11 +6,10 @@
     border: 1px solid #ccc;
     box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
   }
-  
+
   /* Style the editor area */
   .monaco-editor {
     flex: 1;
   }
-  
+
   /* You can further customize the appearance, fonts, and colors to your liking */
-  
