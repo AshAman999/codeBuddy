@@ -29,7 +29,7 @@ function Chats({ socketRef, roomId, userName }) {
     if (currentMessage.trim() === "") return;
 
     const messageData = {
-      senderName: userName,
+      userName: userName,
       message: currentMessage,
       timeStamp: new Date().toLocaleTimeString([], {
         hour: "2-digit",
@@ -42,6 +42,7 @@ function Chats({ socketRef, roomId, userName }) {
       "send-chat-message",
       roomId,
       currentMessage,
+      userName,
       new Date().toLocaleTimeString([], {
         hour: "2-digit",
         minute: "2-digit",
@@ -58,14 +59,14 @@ function Chats({ socketRef, roomId, userName }) {
           <div
             key={index}
             className={
-              message.senderName === userName
+              message.userName === userName
                 ? styles.messageWrapperMe
                 : styles.otherMessageOther
             }
           >
             <div
               className={
-                message.senderName === userName
+                message.userName === userName
                   ? styles.myMessage
                   : styles.otherMessage
               }
