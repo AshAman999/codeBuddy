@@ -48,8 +48,6 @@ https://codebuddytextedit.netlify.app/
 
 ## Screenshots
 
-
-
 ## Contributing
 
 Before contributing, please read the [common contributors guide](https://opensource.guide/) for useful information.
