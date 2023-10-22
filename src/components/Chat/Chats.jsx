@@ -45,7 +45,7 @@ function Chats({ socketRef, roomId, userName }) {
       new Date().toLocaleTimeString([], {
         hour: "2-digit",
         minute: "2-digit",
-      })
+      }),
     );
     setCurrentMessage(""); // Clear the input field after sending
   };
@@ -61,13 +61,15 @@ function Chats({ socketRef, roomId, userName }) {
               message.senderName === userName
                 ? styles.messageWrapperMe
                 : styles.otherMessageOther
-            }>
+            }
+          >
             <div
               className={
                 message.senderName === userName
                   ? styles.myMessage
                   : styles.otherMessage
-              }>
+              }
+            >
               {message.message}
             </div>
             <div className={styles.timestamp}>{message.timeStamp}</div>

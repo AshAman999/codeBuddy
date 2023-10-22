@@ -9,7 +9,7 @@ const userSocketMap = {};
 
 function getAllConnectedClient(roomId) {
   const connectedClients = Array.from(
-    io.sockets.adapter.rooms.get(roomId) || []
+    io.sockets.adapter.rooms.get(roomId) || [],
   );
 
   return (
