@@ -133,10 +133,10 @@ export const EditorHome = () => {
           toast.error(`${userName} left the room`);
           setConnectedUsers((prevConnectedUsers) => {
             return prevConnectedUsers.filter(
-              (client) => client.socketId !== socketId
+              (client) => client.socketId !== socketId,
             );
           });
-        }
+        },
       );
     };
 
@@ -249,14 +249,16 @@ export const EditorHome = () => {
             size="small"
             variant="outlined"
             onClick={downloadCode}
-            startIcon={<SaveAlt />}>
+            startIcon={<SaveAlt />}
+          >
             Save Code
           </Button>
           <Select
             size="small"
             value={theme}
             onChange={handleThemeChange}
-            defaultValue={theme}>
+            defaultValue={theme}
+          >
             {Object.keys(CodeEditorTheme).map((themeKey) => (
               <MenuItem key={themeKey} value={CodeEditorTheme[themeKey].value}>
                 {CodeEditorTheme[themeKey].name}
@@ -268,7 +270,8 @@ export const EditorHome = () => {
             size="small"
             value={language}
             onChange={handleLanguageChange}
-            defaultValue={language}>
+            defaultValue={language}
+          >
             {Object.keys(languages).map((languageKey) => (
               <MenuItem key={languageKey} value={languages[languageKey].value}>
                 {languages[languageKey].name}
@@ -285,14 +288,16 @@ export const EditorHome = () => {
             maxWidth="sm"
             fullWidth
             // scroll="paper"
-            PaperProps={{ sx: { mt: "50px", verticalAlign: "top" } }}>
+            PaperProps={{ sx: { mt: "50px", verticalAlign: "top" } }}
+          >
             <DialogTitle>Chats</DialogTitle>
             <DialogContent
               sx={
                 {
                   // height: "100vh",
                 }
-              }>
+              }
+            >
               {"1"}
             </DialogContent>
             <DialogActions>

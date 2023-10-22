@@ -73,7 +73,8 @@ function LandingPage() {
           <Button
             variant="contained"
             onClick={joinRoom}
-            disabled={!roomId || !userName}>
+            disabled={!roomId || !userName}
+          >
             Submit
           </Button>
           <Button onClick={createNewRoom}> Create A New Room</Button>
