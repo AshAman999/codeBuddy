@@ -1,20 +1,21 @@
-import { fireEvent, render, screen } from "@testing-library/react";
+import {fireEvent, render, screen} from "@testing-library/react";
 import React from "react";
 
 import Chats from "./Chats";
 
 // Mock the socketRef for testing
 const socketRefMock = {
-  current: {
-    on: jest.fn(),
-    off: jest.fn(),
-    emit: jest.fn(),
+  current : {
+    on : jest.fn(),
+    off : jest.fn(),
+    emit : jest.fn(),
   },
 };
 
 describe("Chats Component", () => {
   it("renders the component properly", () => {
-    render(<Chats socketRef={socketRefMock} roomId="123" userName="User" />);
+    render(
+        <Chats socketRef = {socketRefMock} roomId = "123" userName = "User" />);
 
     // Check if the "Chats" header is displayed
     const chatsHeader = screen.getByText("Chats");
@@ -25,19 +26,20 @@ describe("Chats Component", () => {
     expect(inputField).toBeInTheDocument();
 
     // Check if the send button (IconButton) is displayed
-    const sendButton = screen.getByRole("button", { name: "Send" });
+    const sendButton = screen.getByRole("button", {name : "Send"});
     expect(sendButton).toBeInTheDocument();
   });
 
   it("handles sending a chat message", () => {
-    render(<Chats socketRef={socketRefMock} roomId="123" userName="User" />);
+    render(
+        <Chats socketRef = {socketRefMock} roomId = "123" userName = "User" />);
 
     // Get the input field and send button (IconButton)
     const inputField = screen.getByLabelText("Type a message");
     const sendButton = screen.getByLabelText("Send");
 
     // Type a message in the input field
-    fireEvent.change(inputField, { target: { value: "Hello, Chat!" } });
+    fireEvent.change(inputField, {target : {value : "Hello, Chat!"}});
 
     // Click the send button (IconButton)
     fireEvent.click(sendButton);
@@ -46,11 +48,12 @@ describe("Chats Component", () => {
     expect(inputField).toHaveValue("");
 
     // Check if the message is sent to the server
-    expect(socketRefMock.current.emit).toHaveBeenCalledWith(
-      "send-chat-message",
-      "123",
-      "Hello, Chat!",
-      expect.any(String), // Timestamp
-    );
+    expect(socketRefMock.current.emit)
+        .toHaveBeenCalledWith(
+            "send-chat-message",
+            "123",
+            "Hello, Chat!",
+            expect.any(String), // Timestamp
+        );
   });
 });
