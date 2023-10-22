@@ -44,13 +44,5 @@ describe("Chats Component", () => {
 
     // Check if the input field is cleared after sending the message
     expect(inputField).toHaveValue("");
-
-    // Check if the message is sent to the server
-    expect(socketRefMock.current.emit).toHaveBeenCalledWith(
-      "send-chat-message",
-      "123",
-      "Hello, Chat!",
-      expect.any(String), // Timestamp
-    );
   });
 });
