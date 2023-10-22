@@ -1,4 +1,4 @@
-import {render, screen} from "@testing-library/react";
+import { render, screen } from "@testing-library/react";
 
 import Client from "./Client";
 
@@ -7,11 +7,10 @@ describe("Client Component", () => {
     const userName = "TestUser";
 
     // Render the Client component
-    render(<Client userName={
-      userName} />);
+    render(<Client userName={userName} />);
 
     // Check if the Client component is rendered
     const clientComponent = screen.getByTestId("client-component");
-        expect(clientComponent).toBeInTheDocument();
+    expect(clientComponent).toBeInTheDocument();
   });
 });

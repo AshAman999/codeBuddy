@@ -1,28 +1,29 @@
-import {createTheme, ThemeProvider} from "@mui/material";
-import {blue, deepOrange, green, pink, teal} from "@mui/material/colors";
+import { createTheme, ThemeProvider } from "@mui/material";
+import { blue, deepOrange, green, pink, teal } from "@mui/material/colors";
 import React from "react";
 
 const baseTheme = createTheme({
-  typography : {
-    fontFamily : "'Arial', sans-serif",
+  typography: {
+    fontFamily: "'Arial', sans-serif",
   },
-  palette : {
-    primary : blue,
-    secondary : teal,
-  },
-});
-
-const customTheme = (theme) => createTheme({
-  ...theme,
-  palette : {
-    ...theme.palette,
-    primary : pink,
-    secondary : deepOrange,
-    success : green,
+  palette: {
+    primary: blue,
+    secondary: teal,
   },
 });
 
-const MyCustomProvider = ({children}) => {
+const customTheme = (theme) =>
+  createTheme({
+    ...theme,
+    palette: {
+      ...theme.palette,
+      primary: pink,
+      secondary: deepOrange,
+      success: green,
+    },
+  });
+
+const MyCustomProvider = ({ children }) => {
   return (
     <ThemeProvider theme={customTheme(baseTheme)}>{children}</ThemeProvider>
   );
