@@ -48,6 +48,12 @@ https://codebuddytextedit.netlify.app/
 
 ## Screenshots
 
+<img src="https://github.com/AshAman999/codeBuddy/assets/57723319/c948d4b3-f804-43c7-9742-9139464284f0" width="400" height="200">
+<br/>
+
+<img src="https://github.com/AshAman999/codeBuddy/assets/57723319/ba909001-d40b-40bd-81ab-327d9500d842" width="400" height="200">
+
+
 ## Contributing
 
 Before contributing, please read the [common contributors guide](https://opensource.guide/) for useful information.
