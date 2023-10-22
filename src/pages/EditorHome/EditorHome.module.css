@@ -1,0 +1,47 @@
+/* .mainPage {} */
+
+.topBar {
+    margin: 0px 10px;
+    padding: 10px 0px;
+    height: auto;
+    /* width: 100%; */
+    background-color: rgb(255, 255, 255);
+    display: flex;
+    flex-direction: row;
+    gap: 10px;
+    justify-content: space-between;
+    flex-wrap: wrap;
+}
+
+.users {
+    display: flex;
+    flex-direction: row;
+    gap: 10px;
+    flex-wrap: wrap;
+}
+
+.menus {
+    display: flex;
+    flex-direction: row;
+    gap: 10px;
+    flex-wrap: wrap;
+}
+
+.languageSwitcher {
+    display: flex;
+    flex-direction: row;
+    gap: 10px;
+}
+
+.EditorNChat {
+    display: flex;
+    width: auto;
+}
+
+.editorArea{
+    width: 100%;
+}
+
+.chatArea {
+    width: 20%;
+}

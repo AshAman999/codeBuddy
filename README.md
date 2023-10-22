@@ -30,12 +30,12 @@ https://codebuddytextedit.netlify.app/
 
 | Needs                  | Tech Used                           |
 | ---------------------- | ----------------------------------- |
-| Code Editor            | CodeMirror                          |
 | UI Library             | React                               |
 | State Management       | Default Hooks                       |
 | Web Sockets            | WebSocket client for react and Node |
 | Speciality             | Low Network Usage , Lightweight     |
 | Backend (Relay Server) | Node.js                             |
+| Testing Library        | Jest                                |
 
 ## Features
 
@@ -47,10 +47,6 @@ https://codebuddytextedit.netlify.app/
   _More features coming soon_
 
 ## Screenshots
-
-![image](https://user-images.githubusercontent.com/57723319/199150779-9094c33e-8035-4417-bfeb-e1e3f1ec8194.png)
-
-![image](https://user-images.githubusercontent.com/33085535/199157082-07b7c8e8-2b7e-4ffd-95f4-30ddffb9a28d.png)
 
 ## Contributing
 
