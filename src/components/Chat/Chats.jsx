@@ -88,7 +88,7 @@ function Chats({ socketRef, roomId, userName }) {
             }
           }}
         />
-        <IconButton color="primary" onClick={sendChatMessage}>
+        <IconButton aria-label="Send" color="primary" onClick={sendChatMessage}>
           <Send />
         </IconButton>
       </div>
